@@ -7,7 +7,8 @@ NWG_UKREP_ExcludeFromGathering = [
     "Snake_random_F",
     "Rabbit_F",
     "FxWindGrass2",
-    "FxWindPollen1"
+    "FxWindPollen1",
+    "ModuleCurator_F"
 ];
 
 NWG_UKREP_GatherTheInfo =
@@ -144,13 +145,16 @@ NWG_UKREP_GatherTheInfo =
 
 NWG_UKREP_EncodeObjectState =
 {
-    private _stateFlags = [false, false, false, false, false];
+    private _isHidden = isObjectHidden _this;
+    if (isSimpleObject _this) exitWith {_isHidden};
+
+    //else
+    private _stateFlags = [false, false, false, false];
 
     _stateFlags set [0, (dynamicSimulationEnabled _this)];
     _stateFlags set [1, (simulationEnabled _this)];
-    _stateFlags set [2, (isSimpleObject _this)];
-    _stateFlags set [3, (isObjectHidden _this)];
-    _stateFlags set [4, (isDamageAllowed _this)];
+    _stateFlags set [2, _isHidden];
+    _stateFlags set [3, (isDamageAllowed _this)];
 
     //return
     _stateFlags
