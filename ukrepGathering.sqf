@@ -2,13 +2,18 @@ NWG_UKREP_ExcludeFromGathering = [
     "Sign_Arrow_Green_F",
     "Sign_Arrow_F",
     "Sign_Arrow_Yellow_F",
-    "Logic",
     "babe_helper",
+    "Logic",
+    "Camera",
     "Snake_random_F",
     "Rabbit_F",
+    "HoneyBee",
+    "Mosquito",
+    "HouseFly",
     "FxWindGrass2",
     "FxWindPollen1",
-    "ModuleCurator_F"
+    "ModuleCurator_F",
+    "#mark"
 ];
 
 NWG_UKREP_GatherTheInfo =
@@ -32,7 +37,7 @@ NWG_UKREP_GatherTheInfo =
     else
     {
         //Separate mission
-        _objects = allMissionObjects "All";
+        _objects = allMissionObjects "";
         _simpleObjects = allSimpleObjects [];
         _objects = _objects + _simpleObjects;
     };
@@ -50,6 +55,7 @@ NWG_UKREP_GatherTheInfo =
     private _vehicles = [];
     private _statWeapons = [];
     private _decorations = [];
+    private _mines = [];
 
     //Fill collections
     {
@@ -103,6 +109,12 @@ NWG_UKREP_GatherTheInfo =
             continue;
         };
 
+        if (_x isKindOf "TimeBombCore") then
+        {
+            _mines pushBack [_classname, _offset, _dirOffset];
+            continue;
+        };
+
         //else
             private _state = _x call NWG_UKREP_EncodeObjectState;
             _decorations pushBack [_classname, _offset, _dirOffset, _state];
@@ -115,7 +127,13 @@ NWG_UKREP_GatherTheInfo =
 
         private _lastIndex = (count _array) - 1;
 
-        if (_lastIndex == -1) exitWith { diag_log "[]," };//If array is empty
+        if (_lastIndex == -1) exitWith//If array is empty
+        {
+            if (_final) then
+            {diag_log "[] ];";}
+            else
+            {diag_log "[],";};
+        };
 
         for "_i" from 0 to _lastIndex do
         {
@@ -137,7 +155,10 @@ NWG_UKREP_GatherTheInfo =
     [_vehicles] call _dumper;
 
     diag_log "//UNITS";
-    [_units, true] call _dumper;
+    [_units] call _dumper;
+
+    diag_log "//MINES";
+    [_mines, true] call _dumper;
 
     //Dump footer
     diag_log "==========   END   ==========";
