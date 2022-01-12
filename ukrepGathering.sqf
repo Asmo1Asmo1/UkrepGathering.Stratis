@@ -29,11 +29,12 @@ NWG_UKREP_GatherTheInfo =
     //====================================================
     //Dump header and root object info
     private _rootObj = nwgPlacementRoot;
+    private _rootPos = getPosWorld _rootObj;
     private _rootDir = getDir _rootObj;
     private _rootState = _rootObj call NWG_UKREP_EncodeObjectState;
     diag_log "=========GATHER INFO=========";
     diag_log "_result pushBack [  '%SETUPNAME%' ,";
-    diag_log format ["%1,",[(typeOf _rootObj), _rootState, (_rootObj call NWG_fnc_isBuilding)]];
+    diag_log format ["%1,",[(typeOf _rootObj),_rootDir,_rootState,(_rootObj call NWG_fnc_isBuilding)]];
 
     //====================================================
     //Get surrounding objects
@@ -69,7 +70,12 @@ NWG_UKREP_GatherTheInfo =
         {
             private _obj = _missionObjects#_i;
             private _classname  = typeOf _obj;
-            private _offset     = _rootObj worldToModel (ASLToAGL (getPosWorld _obj));
+            private _objPos = getPosWorld _obj;
+            private _offset = [
+                ((_objPos#0)-(_rootPos#0)),
+                ((_objPos#1)-(_rootPos#1)),
+                ((_objPos#2)-(_rootPos#2))
+            ];
             private _dirOffset  = (getDir _obj) - _rootDir;
 
             switch true do
@@ -170,7 +176,7 @@ NWG_UKREP_GatherTheInfo =
 
     //Dump footer
     diag_log "==========   END   ==========";
-	
+
     //return
     "GATHERED. Check log files"
 };

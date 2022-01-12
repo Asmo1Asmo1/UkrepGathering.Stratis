@@ -5,10 +5,10 @@ class EditorData
 	angleGridStep=0.2617994;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=1;
+	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=51;
+		nextID=52;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=15;
+		nextID=18;
 	};
 	class Camera
 	{
-		pos[]={1772.4137,14.395638,5904.1899};
-		dir[]={0.64690399,-0.66203713,0.37844697};
-		up[]={0.57143557,0.74947101,0.33429703};
-		aside[]={0.50495207,1.4901161e-008,-0.86314738};
+		pos[]={1757.5452,16.596861,5879.9375};
+		dir[]={0.35286722,-0.50052208,0.79055995};
+		up[]={0.20401266,0.86571604,0.45706829};
+		aside[]={0.91317344,1.3492536e-007,-0.40759617};
 	};
 };
 binarizationWanted=0;
@@ -42,13 +42,14 @@ addons[]=
 	"A3_Structures_F_Mil_Cargo",
 	"A3_Props_F_Enoch_Military_Camps",
 	"A3_Weapons_F_Explosives",
-	"A3_Weapons_F_Orange_Explosives"
+	"A3_Weapons_F_Orange_Explosives",
+	"A3_Soft_F_Quadbike_01"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=10;
+		items=11;
 		class Item0
 		{
 			className="A3_Structures_F_Mil";
@@ -119,6 +120,13 @@ class AddonsMetaData
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
+		class Item10
+		{
+			className="A3_Soft_F";
+			name="Arma 3 Alpha - Unarmored Land Vehicles";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
 	};
 };
 dlcs[]=
@@ -154,7 +162,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=20;
+		items=21;
 		class Item0
 		{
 			dataType="Layer";
@@ -1556,6 +1564,22 @@ class Mission
 			};
 			id=49;
 			type="B_GMG_01_F";
+		};
+		class Item20
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1762.6669,7.1262865,5910.314};
+				angles[]={0,1.8517127,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=51;
+			type="B_Quadbike_01_F";
 		};
 	};
 };
