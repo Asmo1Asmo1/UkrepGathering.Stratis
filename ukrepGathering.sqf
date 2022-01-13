@@ -45,19 +45,27 @@ NWG_UKREP_GatherTheInfo =
     private _turrets = [];
     private _mines = [];
 
+    //Try getting from NWG environment
+    private _gotFromOB = false;
     if (!isNil "NWG_OB_GetRootLayer") then
     {
         //Mission launched inside NWG environment
         //returns [_buildings,_decor,_units,_vehicles,_turrets,_mines,_groups,_triggers,_logics,_markers]
         private _layer = (call NWG_OB_GetRootLayer);
+        if (isNil "_layer") exitWith {};
+
         _buildings  = (_layer#0) - [_rootObj];//Exclude root obj
         _decor      = (_layer#1) - [_rootObj];//Exclude root obj
         _units      = _layer#2;
         _vehicles   = _layer#3;
         _turrets    = _layer#4;
         _mines      = _layer#5;
-    }
-    else
+
+        _gotFromOB = true;
+    };
+    
+    //Get all mission objects
+    if (!_gotFromOB) then
     {
         //Some separate empty mission
         //Get all objects
