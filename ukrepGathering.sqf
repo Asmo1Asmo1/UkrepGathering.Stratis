@@ -70,8 +70,6 @@ NWG_UKREP_GatherTheInfo =
         //Some separate empty mission
         //Get all objects
         private _missionObjects = allMissionObjects "";
-        private _simpleObjects = allSimpleObjects [];
-        _missionObjects = _missionObjects + _simpleObjects;
 
         //Fill collections
         for "_i" from 0 to ((count _missionObjects)-1) do
@@ -153,6 +151,9 @@ NWG_UKREP_GatherTheInfo =
             else
             {diag_log "[],";};
         };
+
+        //Sort array for easier reading
+        _array sort true;
 
         for "_i" from 0 to _lastIndex do
         {
