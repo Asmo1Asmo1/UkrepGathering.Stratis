@@ -192,14 +192,12 @@ NWG_UKREP_GatherTheInfo =
 
 NWG_UKREP_EncodeObjectState =
 {
-    private _isHidden = isObjectHidden _this;
-    if (isSimpleObject _this) exitWith {_isHidden};
+    if (isSimpleObject _this) exitWith {(isObjectHidden _this)};
 
     //else return
     [
         (dynamicSimulationEnabled _this),
         (simulationEnabled _this),
-        _isHidden,
         (isDamageAllowed _this)
     ]
 };
